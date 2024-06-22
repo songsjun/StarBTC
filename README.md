@@ -27,6 +27,7 @@ Key features:
 - `front-end`: User interface for the lending protocol
 - `zk-bvm`: Zero-knowledge proof circuits for verifying BTC transaction validity
 - `zkproof-contracts`: Solidity contracts for verifying STARK zero-knowledge proofs
+- `starknet-btc-verifier-main`: Starknet contracts for verifying STARK zero-knowledge proofs
 
 ## Technology Stack
 
