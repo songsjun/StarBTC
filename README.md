@@ -30,7 +30,8 @@ Key features:
 
 ## Technology Stack
 
-- BEL2 (Bitcoin Elastos Layer 2) for arbitration network
+- BEL2 for arbitration network
 - StarkWare's Cairo 1 for zero-knowledge proof circuits
 - Solidity for smart contracts
 - EVM-compatible blockchain for contract deployment
+- StarkNet for Layer 2 scalability and low-cost transactions
