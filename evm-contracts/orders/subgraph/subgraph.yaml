@@ -1,0 +1,59 @@
+specVersion: 0.0.4
+repository: https://github.com/BeLayer2/Loan_Contract/subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: LoanContract
+    kind: ethereum/contract
+    network: esc-staging
+    source:
+      abi: LoanContract
+      address: "0xabD1FE0Aca898Cd3fFE8041302b88b4b9Db9BD09"
+      startBlock: 24970611
+    mapping:
+      file: ./src/LoanContract.ts
+      language: wasm/assemblyscript
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      entities:
+        - Order
+        - User
+        - Transaction
+        - OrderChange
+      abis:
+        - name: LoanContract
+          file: ../artifacts/contracts/LoanContract.sol/LoanContract.json
+      eventHandlers:
+        - event: OrderCreated(indexed address,indexed uint8,uint256,address,uint256)
+          handler: handleOrderCreated
+templates:
+  - name: Order
+    kind: ethereum/contract
+    network: esc-staging
+    source:
+      abi: Order
+    mapping:
+      file: ./src/Order.ts
+      language: wasm/assemblyscript
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      entities:
+        - Order
+      abis:
+        - name: Order
+          file: ../artifacts/contracts/order/Order.sol/Order.json
+      eventHandlers:
+        - event: BorrowSuccessful(indexed address)
+          handler: handleBorrowSuccessful
+        - event: OrderClosed(indexed address)
+          handler: handleOrderClosed
+        - event: RepaymentMade(indexed address,uint256,uint256,bytes,bytes)
+          handler: handleRepaymentMade
+        - event: OrderTaken(indexed address,string)
+          handler: handleOrderTaken
+        - event: ArbitrationRequested(indexed address)
+          handler: handleArbitrationRequested
+        - event: BorrowerBTCTransferProofSubmitted(indexed address,bytes32,uint8)
+          handler: handleBorrowerBtcTransferProofSubmitted
+        - event: LenderBTCTransferProofSubmitted(indexed address,bytes32,uint8)
+          handler: handleLenderBtcTransferProofSubmitted

@@ -1,0 +1,125 @@
+type Global @entity {
+    "There should be only one System entity with an ID of 'global'"
+    id: ID!
+
+    orderCount: Int!
+    transactionCount: Int!
+    changeCount: Int!
+}
+
+enum OrderType {
+    BORROW,
+    LENDING
+}
+
+enum OrderStatus {
+    UNKNOWN
+    CREATED # Initial state
+    TAKEN # A taker has agreed to make the deal (borrower or lender, depending on order type)
+    BORROWER_PROOF_SUBMITTED # The borrower has supposedly locked the BTC and has submitted a proof (not yet verified)
+    BORROWER_PAYMENT_CONFIRMED # Lender has manually confirmed that the lock script has received lender's BTC transfer
+    BORROWED # The borrower BTC lock proof has been verified and tokens have been transfered to the borrower. Now waiting for repayment.
+    REPAID # Borrower has repaid the borrowed tokens. Lender has not confirmed
+    LENDER_PROOF_SUBMITTED # After token repayment, the lender or the proof service have confirmed that the repayment was done (ZKP proof verified)
+    LENDER_PAYMENT_CONFIRMED # Borrower has manually confirmed that the lender has executed the unlock script so that his BTC have been unlocked and received.
+    ARBITRATION_REQUESTED # After a repayment, the borrower has made a call to the arbiter to solve a dispute. Now waiting for the arbiter to submit proofs.
+    CLOSED # Final order state, nothing can happen after that
+}
+
+type Order @entity {
+    id: String!
+
+    type: OrderType!
+    status: OrderStatus!
+
+    # Lender
+    lender: EVMUser
+    lenderBTCAddress: String
+
+    # Borrower
+    borrower: EVMUser
+    borrowerBTCAddress: String
+
+    token: String
+    tokenAmount: BigInt
+    collateralAmount: BigInt
+
+    """ address public token;
+    uint256 public tokenAmount;
+    uint256 public limitedDays;
+
+    uint256 public collateralRate;
+
+    uint256 public proofedDelayBlock;
+
+    uint256 public takenExpireTime;
+    uint256 public submitProofExpireTime;
+    uint256 public repaidExpireTime;
+
+    uint256 public borrowerProofBlock;
+    uint256 public lenderProofBlock;
+
+    bytes32 public toLenderBtcTx;
+    bytes32 public toBorrowerBtcTx;
+
+    bool public lenderConfirmIsReceivedBtc;
+    bool public borrowerConfirmIsReceivedBtc;
+    uint256 public refundTotalTokenAmount; """
+
+    # Times
+    createdAt: Int!
+    takenAt: Int
+    borrowedAt: Int
+    borrowerRepaidAt: Int
+    lenderRepaidAt: Int
+    borrowerProofAt: Int
+    lenderProofAt: Int
+
+    # Relations
+    changes: [OrderChange!]! @derivedFrom(field: "order")
+}
+
+type EVMUser @entity {
+    "User's Ethereum address as a hex-string"
+    id: ID!
+
+    "Number of orders created - both as borrower and as lender"
+    createdOrdersCount: Int!
+
+    "Number of orders taken - both as borrower and as lender"
+    takenOrdersCount: Int!
+
+    "Orders in which this user is the lender"
+    lenderOrders: [Order!]! @derivedFrom(field: "lender")
+
+    "Orders in which this user is the borrows"
+    borrowerOrders: [Order!]! @derivedFrom(field: "borrower")
+}
+
+type Transaction @entity {
+  "Transaction hash"
+  id: ID!
+
+  "Can be used to correctly sort transactions even if they were mined in the same block"
+  sequenceNumber: Int!
+  blockNumber: Int!
+
+  "Timestamp of block that included this transaction (seconds since epoch)"
+  timestamp: Int!
+
+  changes: [OrderChange!]! @derivedFrom(field: "transaction")
+}
+
+type OrderChange @entity {
+    "Same as sequence number, but as an ID (string)"
+    id: ID!
+
+    "Can be used to correctly sort changes even if they were made by the same transaction"
+    sequenceNumber: Int!
+
+    transaction: Transaction!
+    order: Order!
+
+    orderStatusBefore: OrderStatus!
+    orderStatusAfter: OrderStatus!
+}

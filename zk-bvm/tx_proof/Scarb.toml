@@ -1,0 +1,18 @@
+[package]
+name = "tx_proof"
+version = "0.0.1"
+edition = "2023_11"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+
+[dependencies]
+alexandria_data_structures = { git = "https://github.com/keep-starknet-strange/alexandria.git", tag = "cairo-v2.6.0" }
+alexandria_bytes = { git = "https://github.com/keep-starknet-strange/alexandria.git", tag = "cairo-v2.6.0" }
+zkbvm_utils = { path = "../../src/utils" }
+zkbvm_crypto = { path = "../../src/crypto" }
+zkbvm_transaction = { path = "../../src/transaction" }
+
+[profile.release.cairo]
+enable-gas = false
+sierra-replace-ids = true
+unstable-add-statements-functions-debug-info = false

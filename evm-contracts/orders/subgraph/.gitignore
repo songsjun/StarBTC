@@ -1,0 +1,8 @@
+node_modules
+/build
+/generated
+.DS_Store
+*/build
+*/generated
+package-lock.json
+yarn.lock

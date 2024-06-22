@@ -1,0 +1,20 @@
+{
+  "esc-prod": {
+    "LoanContract": {
+      "address": "0x60Ff693e5b900d62437d160764bC9D703A93F4ab",
+      "startBlock": 25002242
+    }
+  },
+  "esc-staging": {
+    "LoanContract": {
+      "address": "0xabD1FE0Aca898Cd3fFE8041302b88b4b9Db9BD09",
+      "startBlock": 24970611
+    }
+  },
+  "esc-testnet": {
+    "LoanContract": {
+      "address": "0x45679eD4f33Ed1Edb6A4E8075b4300C4169bBf1c",
+      "startBlock": 23921387
+    }
+  }
+}

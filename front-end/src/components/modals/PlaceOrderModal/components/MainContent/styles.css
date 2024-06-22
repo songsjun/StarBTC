@@ -1,0 +1,14 @@
+.rs-slider-bar {
+  --rs-slider-bar: #F6921A;
+}
+
+.rs-slider-handle {
+--rs-slider-thumb-border: #F6921A;
+}
+
+/* Make the handle larger */
+.rs-slider-handle::before {
+  width:20px;
+  height:20px;
+  margin-top: -4px;
+}

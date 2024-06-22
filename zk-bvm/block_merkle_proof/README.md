@@ -1,0 +1,23 @@
+# tx_proof
+
+## how to run
+
+Refer to [cairo1-run](https://github.com/lambdaclass/cairo-vm/blob/main/cairo1-run/README.md)
+
+prepare cairo-run:
+
+```shell
+git clone https://github.com/lambdaclass/cairo-vm
+cd cairo-vm/cairo1-run
+make deps
+```
+
+run the program:
+
+```shell
+CAIRO1_RUN=<path/to/cairo1-run> python3 run_proof.py --root c2dea052f8473417a19b8dcea735e3dc3f1472465235575716c833c989e5e9cc --leaf 2b23fcd365cfc71cbd98f404bae891fb38fd3557c39062bb55710950021da840 --proofs f64cbaecfe19862ed719995be52ae9554bfcef09434979c9555be859ef4f801d,41c26af009b6a36d2e9934e2f81616090318ba06af50d21c628d69711f4d23b2,b2b72400fb86932a42d698ab107cfa2ea5995585b54ae6ad7a14b70debf42ded,dc167f2d7cf92d1dea9835168a83ec8b4b8b1be6093a833d92f3f607b6d3d5f0,1b43065d314147b2e5720b2816b7b2bdec52255a59cc70167aa90f1064a25dff,bfdb7f20a881436242f01f9b4ef737ab64bfa7d7f02bbf0d2896689536a5ff14,ea8a2cc1d761ab98fbb0443597ad5f48341dff10a46db5f9f10298d4b9a1f197,74ff4d3201a16d0a240c79765323ae5652a4b08a26d5a4aacc444e2f9191842a,5983362d19d96cc076964f9e16d0d519957dd5995f33d8bb3b73b4c0600dc1d7,6ea7884fce69d974004bf5721b09f812b383a63fa4a192201607da249e1dddf0,91d21cbcd6884fbb5a228e6310fa3a2a5a90feeca89ae9aade3d775e2fe1e861,1dc860347243329f8f38f1145b2191664643fffc36746df328b88d0c69f3d160,a0ac4d1bd17cbdeda1c1b841584365847bb00ead14ae6f814e7b8fd3fd3d274c --pos false,true,true,true,false,false,true,false,true,false,true,true,true
+```
+
+### output
+
+1 indicate verify succeeded, 0 indicate verify failed.
