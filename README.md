@@ -36,3 +36,9 @@ Key features:
 - Solidity for smart contracts
 - EVM-compatible blockchain for contract deployment
 - StarkNet for Layer 2 scalability and low-cost transactions
+
+## Demo Video
+
+Check out our demo video below:
+
+https://github.com/songsjun/StarBTC/assets/dev/StarBTC_Demo_Show.mp4
