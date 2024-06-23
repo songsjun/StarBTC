@@ -42,4 +42,7 @@ Key features:
 
 Check out our demo video below:
 
-https://github.com/songsjun/StarBTC/assets/dev/StarBTC_Demo_Show.mp4
+[Demo Video](https://github.com/songsjun/StarBTC/raw/dev/StarBTC_Demo_Show.mp4)
+
+
+
