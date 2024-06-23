@@ -1,6 +1,6 @@
 # StarBTC
 
-StarBTC is a decentralized lending protocol that enables native Bitcoin collateralized loans without relying on wrapped BTC or cross-chain bridges. It leverages the BEL2(https://bel2.org) network for arbitration and zero-knowledge proofs for transaction verification.
+StarBTC is a decentralized lending protocol that enables native Bitcoin collateralized loans without relying on wrapped BTC or cross-chain bridges. It leverages the BEL2 network for arbitration, uses ZeroSync for block verification, and employs zero-knowledge proofs for transaction verification.
 
 ## Overview
 
@@ -32,6 +32,7 @@ Key features:
 ## Technology Stack
 
 - BEL2 for arbitration network
+- ZeroSync for block header ZKP
 - StarkWare's Cairo 1 for zero-knowledge proof circuits
 - Solidity for smart contracts
 - EVM-compatible blockchain for contract deployment
